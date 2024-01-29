@@ -1,5 +1,5 @@
 <script>
-    class daoComunidad{
+    class servicioComunidad{
 
      async  function obtenerOpiniones() {
         try {
