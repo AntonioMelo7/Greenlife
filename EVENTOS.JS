@@ -1,6 +1,6 @@
-class servicioEventos{
+class ServicioEventos{
 
-    async  function obtenerEventos() {
+    async   obtenerEventos() {
        try {
            const response = await fetch("/api/opiniones", {
                method: "GET",
@@ -19,7 +19,7 @@ class servicioEventos{
            return [];
        }
    }
-   async  function obtenerEvento($id) {
+   async   obtenerEvento($id) {
     //HAY QUE MIRAR COMO FILTRAR
     try {
         const response = await fetch("/api/eventos/$(id)", {
@@ -39,27 +39,8 @@ class servicioEventos{
         return [];
     }
 }
-    async function agregarEvento(nuevoEvento) {
-        try {
-            const response = await fetch("/api/eventos", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(nuevoEvento),
-            });
-
-            if (!response.ok) {
-                throw new Error("Error al agregar el nuevo evento");
-            }
-
-            return await response.json();
-        } catch (error) {
-            console.error("Error en la solicitud:", error);
-            return null; 
-        }
-    }
-    async function eliminarEvento($id) {
+    
+    async  eliminarEvento($id) {
         //no se como hacer para que solo borre los suyos
         try {
             const response = await fetch("/api/eventos/$(id)", {
@@ -80,6 +61,25 @@ class servicioEventos{
             return null; 
         }
     }
+    async  agregarEvento(nuevoEvento) {
+        try {
+            const response = await fetch("/api/eventos", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(nuevoEvento),
+            });
 
+            if (!response.ok) {
+                throw new Error("Error al agregar el nuevo evento");
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error("Error en la solicitud:", error);
+            return null; 
+        }
+    }
         
    }

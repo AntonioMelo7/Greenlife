@@ -1,30 +1,28 @@
-<script>
-    class servicioComunidad{
 
-     async  function obtenerOpiniones() {
-        try {
-            const response = await fetch("/api/opiniones", {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
+class ServicioComunidad{
 
-            if (!response.ok) {
-                throw new Error("Error al obtener opiniones");
-            }
+async  obtenerOpiniones() {
+   try {
+       const response = await fetch('/api/opiniones', {
+           method: "GET",
+           headers: {
+               "Content-Type": "application/json",
+           },
+       });
 
-            return await response.json();
-        } catch (error) {
-            console.error("Error en la solicitud:", error);
-            return [];
-        }
-    }
+       if (!response.ok) {
+           throw new Error("Error al obtener opiniones");
+       }
 
-       
-    }
+       return await response.json();
+   } catch (error) {
+       console.error("Error en la solicitud:", error);
+       return [];
+   }
+}
 
+  
+}
     
 
 
-</script>
