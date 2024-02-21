@@ -1,7 +1,8 @@
 const router = require("express").Router();
 
-router.get("/",(req, res, next) =>{
-    res.json("todo bien por aqui");
-});
+//traemos todas las rutas
+
+router.use("/eventos", require('./eventos.routes'))
+
 
 module.exports = router;
