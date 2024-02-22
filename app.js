@@ -26,11 +26,11 @@ mongoose.connect("mongodb://localhost:27017/", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-
+*/
 app.listen(puerto, () => {
   console.log(`Servidor escuchando en http://localhost:${puerto}`);
 });
 
-*/
+
 
 module.exports = app;

@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const Event = require ('./../models/Plant.model')
+const Event = require ('./../models/Plant.models')
 
 router.get('/getAllPlants', (req, res) =>{
     

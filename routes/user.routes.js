@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const User = require ('./../models/User.model');
+const User = require ('./../models/User.models');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
@@ -46,7 +46,7 @@ router.post("/signup", async (req, res, next) => {
     }
 });
 
-router.delete("/deleteUser/:user", async (req, res, next) => {
+router.delete("/deleteUser/:id", async (req, res, next) => {
     const username = req.params.user;
 
     try {
