@@ -9,8 +9,7 @@ const plantSchema = new Schema(
   
     },
     image: {
-        type: String,
-        required: [true, 'Es obligatorio incluir una imagen']
+        type: String
       },
 
     description: {

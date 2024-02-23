@@ -2,8 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema(
   {
-    //ver si el id se pone autoincremental aqui o en la bbdd
-    id: { type: Number, unique: true, required: true },
+  
     name: {
         type: String,
         required: [true, 'Es obligatorio incluir nombre y apellidos'],

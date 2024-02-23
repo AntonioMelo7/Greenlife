@@ -21,10 +21,26 @@ router.get("/getOneEvent/:id", (req, res, next) => {
 //Guarda un evento
 
 router.post("/saveEvento", (req, res) => {
-  const { name, image, date, location, description } = req.body;
+  const { name, image, location, description } = req.body;
 
-  Event.create({ name, image, date, location, description })
+  Event.create({ name, image, location, description })
     .then((response) => res.json(response))
+    .catch((err) => res.status(500).json(err));
+});
+
+//Elimina evento
+router.delete("/deleteEvento/:id", (req, res) => {
+  const { id } = req.params;
+
+  Event.findByIdAndDelete(id)
+    .then((response) => {
+      if (!response) {
+        // No se encontró el evento con ese ID
+        return res.status(404).json({ message: "Evento no encontrado" });
+      }
+
+      res.json({ message: "Evento eliminado exitosamente" });
+    })
     .catch((err) => res.status(500).json(err));
 });
 module.exports = router;

@@ -22,7 +22,7 @@ const sanitizeAndValidate = (username) => {
 };
 
 router.post("/signup", async (req, res, next) => {
-    const { name, email, user, password, datebirth, gender, location, description } = req.body;
+    const { name, email, username, password, datebirth, gender, location, description } = req.body;
 
     try {
         const hashedPassword = await bcrypt.hash(password, 10);

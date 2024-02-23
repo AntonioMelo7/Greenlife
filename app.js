@@ -16,6 +16,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(express.json());
 
 const allRoutes = require ('./routes/index.routes');
 app.use('/api', allRoutes);
