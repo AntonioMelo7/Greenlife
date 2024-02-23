@@ -36,13 +36,7 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: [true, 'Es obligatorio incluir una contraseña'],
-      validate: {
-        validator: function(value) {
-          const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-          return passwordRegex.test(value);
-        },
-        message: props => `${props.value} no es una contraseña válida. Debe contener al menos 8 caracteres, una mayúscula, una minúscula y un carácter especial.`,
-      },
+      
     },
     datebirth: {
       type: Date,
