@@ -21,13 +21,6 @@ app.use(express.json());
 const allRoutes = require ('./routes/index.routes');
 app.use('/api', allRoutes);
 
-/*
-// Conectar a la base de datos MongoDB
-mongoose.connect("mongodb://localhost:27017/", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-*/
 app.listen(puerto, () => {
   console.log(`Servidor escuchando en http://localhost:${puerto}`);
 });
