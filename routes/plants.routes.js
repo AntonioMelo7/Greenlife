@@ -40,4 +40,25 @@ router.delete("/deletePlant/:id", (req, res) => {
     })
     .catch((err) => res.status(500).json(err));
 });
+router.put("/updatePlant/:id", async (req, res, next) => {
+  const id = req.params.id;
+  const updatedData = req.body;
+
+  try {
+      const updatedPlant = await Plant.updateOne({ _id: id }, { $set: updatedData });
+
+      if (updatedPlant.n === 0) {
+    
+          res.status(404).json({ message: "Esqueje no encontrado" });
+      } else {
+      
+          res.json({ message: "Esqueje actualizado correctamente" });
+      }
+  } catch (error) {
+     
+      console.error(error);
+      res.status(500).json({ message: "Error interno del servidor" });
+  }
+});
+
 module.exports = router;

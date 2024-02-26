@@ -43,4 +43,26 @@ router.delete("/deleteEvento/:id", (req, res) => {
     })
     .catch((err) => res.status(500).json(err));
 });
+router.put("/updateEvento/:id", async (req, res, next) => {
+  const id = req.params.id;
+  const updatedData = req.body;
+
+  try {
+      const result = await Event.updateOne({ _id: id }, { $set: updatedData });
+
+      if (result.nModified === 0) {
+          // No se encontró el evento con ese ID o no se realizó ninguna modificación
+          res.status(404).json({ message: "Evento no encontrado o no se realizó ninguna modificación" });
+      } else {
+          // Evento actualizado correctamente
+          res.json({ message: "Evento actualizado correctamente" });
+      }
+  } catch (error) {
+      // Manejar otros errores
+      console.error(error);
+      res.status(500).json({ message: "Error interno del servidor" });
+  }
+});
+
 module.exports = router;
+
