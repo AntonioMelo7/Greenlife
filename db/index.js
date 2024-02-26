@@ -1,8 +1,9 @@
+require('dotenv').config({ path: './private.env' });
+
 const mongoose = require("mongoose");
 
+const MONGO_URI = process.env.MONGODB_URI;
 
-const MONGO_URI = process.env.MONGODB_URI || "mongodb+srv://greenlife:greenlife1234@greenlife.jacifyy.mongodb.net/Greenlife";
- 
 mongoose
   .connect(MONGO_URI)
   .then((x) => {
