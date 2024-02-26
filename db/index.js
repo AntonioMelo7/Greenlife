@@ -1,8 +1,10 @@
-require('dotenv').config({ path: './private.env' });
+const fs = require('fs');
+const configPath = './db/config.json'; 
+const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+const MONGO_URI = config.mongo.uri;
+
 
 const mongoose = require("mongoose");
-
-const MONGO_URI = process.env.MONGODB_URI;
 
 mongoose
   .connect(MONGO_URI)

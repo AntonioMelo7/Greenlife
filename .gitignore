@@ -1,2 +1,2 @@
 routes/private.env
-db/private.env
+db/config.json
