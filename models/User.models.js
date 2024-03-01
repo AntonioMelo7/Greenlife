@@ -45,11 +45,11 @@ const userSchema = new Schema(
     gender: {
         type: String,
         required: [true, 'Es obligatorio seleccionar un género'],
-        enum: ['masculino', 'femenino', 'otro'],
+        enum: ['Masculino', 'Femenino', 'Otro'],
       },
     location: {
       type: String,
-      required: [true, 'Es obligatorio incluir una localidad']
+      
     },
     description: {
       type: String,
