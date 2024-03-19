@@ -48,6 +48,7 @@ const userSchema = new Schema(
         enum: ['Masculino', 'Femenino', 'Otro'],
       },
     location: {
+      required: [true, 'Es obligatorio introducir tu localidad'],
       type: String,
       
     },
