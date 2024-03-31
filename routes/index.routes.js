@@ -5,5 +5,6 @@ const router = express.Router();
 router.use("/eventos", require('./eventos.routes'));
 router.use("/plants", require('./plants.routes'));
 router.use("/user", require('./user.routes'));
+router.use("/huella", require('./huella.routes'));
 
 module.exports = router;
