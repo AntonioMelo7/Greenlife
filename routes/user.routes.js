@@ -76,11 +76,11 @@ router.delete("/deleteUser/:id", async (req, res, next) => {
     }
 });
 
-router.get('/user/:id/profile', async (req, res) => {
-    const userId = req.params.id;
+router.get('/user/:username/profile', async (req, res) => {
+    const username = req.params.username;
 
     try {
-        const user = await User.findById(userId);
+        const user = await User.findOne({ username: username }); 
 
         if (!user) {
             return res.status(404).json({ message: 'Usuario no encontrado' });
@@ -99,6 +99,7 @@ router.get('/user/:id/profile', async (req, res) => {
         res.status(500).json(error);
     }
 });
+
 
 router.get('/admin/:id/profile', async (req, res) => {
     const userId = req.params.id;
@@ -159,37 +160,44 @@ router.put("/updateUser/:userId", async (req, res, next) => {
 
 router.post("/login", async (req, res) => {
     const { username, password } = req.body;
-
+  
     try {
-        const foundUser = await User.findOne({ username: username });
-
-        if (!foundUser) {
-            console.log("Usuario no encontrado");
-            return res.status(401).json({ message: "Nombre de usuario incorrecto" });
-        }
-
-        console.log("Contraseña almacenada:", foundUser.password);
-        console.log("Contraseña proporcionada:", password);
-
-        const isPasswordValid = await bcrypt.compare(password, foundUser.password);
-
-        if (!isPasswordValid) {
-            console.log("Contraseña incorrecta");
-            return res.status(401).json({ message: "Contraseña incorrecta" });
-        }
-
-        console.log("Inicio de sesión exitoso");
-       /*ESTO DA ERROR Y NO VEO COMO ARREGLARLO
-        const token = jwt.sign({ userId: foundUser._id }, process.env.JWT_SECRET, { expiresIn: '3h' });
-
-        res.cookie('token', token, { httpOnly: true, maxAge: 12 * 60 * 60 * 1000, secure: true, sameSite: 'strict' });
-*/
-        res.json({ message: 'Inicio de sesión exitoso' });
+      const foundUser = await User.findOne({ username: username });
+  
+      if (!foundUser) {
+        console.log("Usuario no encontrado");
+        return res.status(401).json({ message: "Nombre de usuario incorrecto" });
+      }
+  
+      console.log("Contraseña almacenada:", foundUser.password);
+      console.log("Contraseña proporcionada:", password);
+  
+      const isPasswordValid = await bcrypt.compare(password, foundUser.password);
+  
+      if (!isPasswordValid) {
+        console.log("Contraseña incorrecta");
+        return res.status(401).json({ message: "Contraseña incorrecta" });
+      }
+  
+      console.log("Inicio de sesión exitoso");
+     
+      const payload = {
+        userId: foundUser._id,
+        username: foundUser.username
+      };
+  
+      const secretKey = "3456m3456346n";
+      const token = jwt.sign(payload, secretKey, { expiresIn: '3h' });
+  
+      res.cookie('token', token, { httpOnly: true, maxAge: 12 * 60 * 60 * 1000, secure: true, sameSite: 'strict' });
+  
+      res.json({ message: 'Inicio de sesión exitoso' });
     } catch (error) {
-        res.status(500).json(error);
+      console.error("Error en el servidor:", error);
+      res.status(500).json({ message: "Error interno del servidor" });
     }
-});
-
+  });
+  
 
 router.post('/logout', (req, res) => {
     res.clearCookie('token'); 
