@@ -21,7 +21,7 @@ const sanitizeAndValidate = (username) => {
     return sanitizedUsername;
 };
 
-router.post("/signup", async (req, res, next) => {
+router.post("/signnpup", async (req, res, next) => {
     const { name, email, username, password, datebirth, gender, location, description } = req.body;
 
     try {
